@@ -1,0 +1,49 @@
+Should i put all this now in core/engine/technical_engine.py? 
+
+return [
+
+    trend.sma50(),
+
+    trend.sma200(),
+
+    trend.ema20(),
+
+    trend.ema50(),
+
+    trend.rsi(),
+
+    trend.macd(),
+
+    trend.atr(),
+
+]
+
+Also,  this is now my app.py
+
+from core.market import get_market_snapshot
+
+from core.indicators.trend import TrendIndicators
+
+from dashboard.terminal import show_dashboard
+
+from core.engine.technical_engine import TechnicalEngine
+
+snapshot = get_market_snapshot()
+
+
+
+engine = TechnicalEngine(snapshot.history)
+
+
+
+results = engine.analyze()
+
+
+
+for indicator in results:
+
+    print(indicator)
+
+
+
+show_dashboard(snapshot)
