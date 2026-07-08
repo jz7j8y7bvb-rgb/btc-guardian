@@ -2,6 +2,7 @@ from datetime import datetime
 
 from sqlalchemy import (
     create_engine,
+    String,
     Column,
     Integer,
     Float,
@@ -11,7 +12,7 @@ from sqlalchemy import (
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-from config import DATABASE_FILE
+from settings import DATABASE_FILE
 
 Base = declarative_base()
 
@@ -32,19 +33,27 @@ class MarketHistory(Base):
 
     btc_eur = Column(Float)
 
+    guardian_score = Column(Integer)
+
+    recommendation = Column(String)
+
+    confidence = Column(Integer)
 
 def initialize_database():
 
     Base.metadata.create_all(engine)
 
 
-def save_snapshot(snapshot):
+def save_snapshot(snapshot, analysis):
 
     session = Session()
 
     row = MarketHistory(
         btc_usd=snapshot.btc_usd,
         btc_eur=snapshot.btc_eur,
+        guardian_score=analysis.score,
+        recommendation=analysis.recommendation,
+        confidence=analysis.confidence,
     )
 
     session.add(row)

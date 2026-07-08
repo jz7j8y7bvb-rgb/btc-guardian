@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum
 
 
@@ -16,3 +16,7 @@ class IndicatorResult:
     value: float
     signal: Signal
     description: str
+
+    # Relative importance of the indicator.
+    # Used by the Guardian Engine in future versions.
+    weight: float = 1.0

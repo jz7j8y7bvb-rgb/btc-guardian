@@ -1,13 +1,24 @@
 from core.market import get_market_snapshot
-from core.indicators.trend import TrendIndicators
+from core.engine.technical_engine import TechnicalEngine
+from core.engine.guardian_engine import GuardianEngine
 from dashboard.terminal import show_dashboard
+from core.database import initialize_database, save_snapshot
 
-snapshot = get_market_snapshot()
+def main():
+    initialize_database()
 
-trend = TrendIndicators(snapshot.history)
+    snapshot = get_market_snapshot()
 
-print(trend.sma50())
-print(trend.sma200())
-print(trend.rsi())
+    technical = TechnicalEngine(snapshot.history)
+    results = technical.analyze()
 
-show_dashboard(snapshot)
+    guardian = GuardianEngine()
+    analysis = guardian.analyze(results)
+
+    save_snapshot(snapshot, analysis)
+
+    show_dashboard(snapshot, results, analysis)
+
+
+if __name__ == "__main__":
+    main()

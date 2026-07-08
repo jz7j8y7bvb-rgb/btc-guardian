@@ -47,3 +47,6 @@ for indicator in results:
 
 
 show_dashboard(snapshot)
+
+
+Also i did a git push and i stafed it as Bitcoin Guardian v1.1, tell me if i do a branch or how i continue from there
