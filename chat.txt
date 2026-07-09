@@ -1,52 +1,75 @@
-Should i put all this now in core/engine/technical_engine.py? 
+ this is our mission statement:
 
-return [
+Bitcoin Guardian is an evidence-based Bitcoin decision support system.
 
-    trend.sma50(),
+It does not try to predict the future.
 
-    trend.sma200(),
+It continuously evaluates technical, macroeconomic, institutional, and sentiment evidence to help the user decide whether to accumulate, hold, reduce risk, or wait.
 
-    trend.ema20(),
+For tommorrow:
 
-    trend.ema50(),
+1)we have to check what is the best timeframe to take data as input for the trend engine via the api? we take data from smp50 in which timeframe? whats the best option based on our mission statement
 
-    trend.rsi(),
+2)consider also using Ichimoku data
 
-    trend.macd(),
-
-    trend.atr(),
-
-]
-
-Also,  this is now my app.py
-
-from core.market import get_market_snapshot
-
-from core.indicators.trend import TrendIndicators
-
-from dashboard.terminal import show_dashboard
-
-from core.engine.technical_engine import TechnicalEngine
-
-snapshot = get_market_snapshot()
+3) we are in a crucial decision state so i want ideas, brainstorming, suggestion based on your knowledge as a senior trader? Are we building a technical analysis system based on btc?
 
 
 
-engine = TechnicalEngine(snapshot.history)
 
+Ichimoku data & settings: 
 
+inside Cloud = no trade zone
+price out of cloud: entry signal (break of sup/resistance)
 
-results = engine.analyze()
+above cloud: longs
+below cloud: shorts
 
+cloud = support/resistance
 
+flat lines = 50% fib
 
-for indicator in results:
+TK cross:
+bullish blue above red
+bearish red above blue
 
-    print(indicator)
+lagging span:
+want: lagging span above cloud in bullish trend, lagging span above price in bullish trend
+lagging span in price - consolidation
 
+kumo twist:
+areas are easy to break/fall cause low support/resistance
+they indicate early price reversal
+if everything settles up for long trade but cloud still bearish.. the twist into bull cloud indicates the entry point
 
+complement:
+fib retrace/extension, RSI
 
-show_dashboard(snapshot)
+Entry checklist long:
+price above cloud yes/no
+bullish cloud yes/no
+bullish tk cross yes/no
+lagging span above cloud, above price yes/no
 
+Entry checklist short:
+price below cloud yes/no
+bearish cloud yes/no
+bearish tk cross yes/no
+lagging span below price yes/no
+---
+adjusted settings:
+20/60/120/30
+Why?
+base settings are meant for market with weekend closed.
+add a + 2 for 24/7 markets.
+doubling it to receive these settings prevents many false signals
+---
+cause people asked for my color settings:
+Conversion line: 00eeff
+Base Line: ff0000
+Lagging Span: 00ff0b
+Leading Span A: 23f0b2
+Leading Span B: ff1171
+Color 0: same as Leading Span A
+Color 1: same as Leading Span B
 
-Also i did a git push and i stafed it as Bitcoin Guardian v1.1, tell me if i do a branch or how i continue from there
