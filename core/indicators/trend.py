@@ -64,3 +64,15 @@ class TrendIndicators:
             signal,
             "Relative Strength Index",
         )
+    
+    def sma200_distance(self):
+
+        sma200 = ta.trend.sma_indicator(
+            self.history["Close"],
+            window=200,
+        ).iloc[-1]
+
+        price = self.history["Close"].iloc[-1]
+
+        distance = ((price - sma200) / sma200) * 100
+        return float(distance)

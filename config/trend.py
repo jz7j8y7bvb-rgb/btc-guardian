@@ -1,0 +1,12 @@
+# Trend Engine Weights
+
+SMA50_WEIGHT = 10
+SMA200_WEIGHT = 20
+RSI_WEIGHT = 5
+
+# Trend score thresholds
+
+STRONG_BULLISH = 75
+BULLISH = 60
+NEUTRAL = 40
+BEARISH = 25
